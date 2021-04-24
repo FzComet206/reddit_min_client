@@ -3,8 +3,10 @@ import { Props } from 'framer-motion/types/types'
 import { Provider, createClient } from "urql"
 import theme from '../theme'
 
+import config from '../config';
+
 const client = createClient({
-  url: "http://localhost:3000/graphql",
+  url: `${config.serverip}:${config.serverport}/graphql`,
   fetchOptions: {
     credentials: "include",
   },
