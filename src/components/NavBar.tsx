@@ -2,7 +2,7 @@
 import { Box, Button, Flex, Link } from "@chakra-ui/react"
 import React from "react"
 import NLink from "next/link";
-import { useMeQuery } from "../generated/graphql";
+import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 
 interface NavBarProps {
 
@@ -11,6 +11,7 @@ interface NavBarProps {
 export const NavBar: React.FC<NavBarProps> = ({}) => {
     
     const [{data, fetching}] = useMeQuery();
+    const [{fetching: logoutFetching}, logout] = useLogoutMutation();
 
     let body = null;
 
@@ -50,10 +51,11 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 
                 <Box mt={3}>
                     <Button onClick={()=>{
-                        console.log("logout not implemented")
-                    }}>
+                        logout()
+                        console.log("logged out")    // need to update cache
+                    }} isLoading={logoutFetching}>  
                         Logout
-                    </Button>
+                    </Button> 
                 </Box>
 
             </Box>
