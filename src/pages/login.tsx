@@ -8,14 +8,31 @@ import React from 'react';
 import { useLoginMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from "next/router";
+import { RedirectingButton } from '../components/Buttons';
+import { useState } from 'react';
 
 const Login: React.FC<{}> = ({}) => {
 
     const router = useRouter();
     const [, login] = useLoginMutation(); // types and hooks generated form graphql code gen and urql
+    
+    const [loading, setloading] = useState(false);
 
     return (
         <Wrapper variant='small'>
+
+            <Box>
+                <RedirectingButton
+                        text='Back to main'
+                        loadingText='Redirecting'
+                        route='/'
+                        state={loading}
+                        setState={setloading}
+                        router={router}
+                        color='linkedin'
+                />
+            </Box>
+
             <Formik initialValues={{ username: "", password: "" }}
 
                     onSubmit={ async (values, { setErrors })=>{  // formik seterrors
@@ -32,7 +49,7 @@ const Login: React.FC<{}> = ({}) => {
 
                 {({isSubmitting}) => (
                     <Form>
-                        <Box mt={4}>
+                        <Box mt={2}>
 
                             <InputField 
                                 name="username"
@@ -51,7 +68,7 @@ const Login: React.FC<{}> = ({}) => {
                         <Box marginTop={3}>
                             <Button 
                                 type="submit" 
-                                variantcolor="teal"
+                                colorScheme='linkedin'
                                 isLoading={isSubmitting}
                                 >
                                 Login

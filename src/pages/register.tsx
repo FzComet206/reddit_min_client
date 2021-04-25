@@ -3,11 +3,12 @@ import { InputField } from '../components/InputField';
 
 import { Box, Button } from "@chakra-ui/react"
 import { Formik, Form } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 ;
 import { useRegisterMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from "next/router";
+import { RedirectingButton } from '../components/Buttons';
 
 interface registerProps {}
 
@@ -16,8 +17,23 @@ const Register: React.FC<registerProps> = ({}) => {
     const router = useRouter();
     const [, register] = useRegisterMutation(); // types and hooks generated form graphql code gen and urql
 
+    const [loading, setloading] = useState(false);
+    
     return (
         <Wrapper variant='small'>
+
+            <Box>
+                <RedirectingButton
+                        text='Back to main'
+                        loadingText='Redirecting'
+                        route='/'
+                        state={loading}
+                        setState={setloading}
+                        router={router}
+                        color='linkedin'
+                />
+            </Box>
+
             <Formik initialValues={{ username: "", password: "" }}
 
                     onSubmit={ async (values, { setErrors })=>{  // formik seterrors
@@ -53,7 +69,7 @@ const Register: React.FC<registerProps> = ({}) => {
                         <Box marginTop={3}>
                             <Button 
                                 type="submit" 
-                                variantcolor="teal"
+                                colorScheme='linkedin'
                                 isLoading={isSubmitting}
                                 >
                                 Register

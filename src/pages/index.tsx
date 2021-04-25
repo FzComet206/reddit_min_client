@@ -1,10 +1,11 @@
-import { useRouter } from 'next/router';
 import { NavBar } from '../components/NavBar';
+import { Wrapper } from '../components/Wrapper';
 
 const Index = () => {
-    const router = useRouter();
     return (
-        <NavBar/>
+        <Wrapper variant='small'>
+            <NavBar/>
+        </Wrapper>
     )
 };
 export default Index;

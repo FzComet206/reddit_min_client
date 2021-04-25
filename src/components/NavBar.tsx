@@ -1,8 +1,10 @@
 
-import { Box, Button, Flex, Link } from "@chakra-ui/react"
+import { Box, Button, Flex, HStack } from "@chakra-ui/react"
 import React from "react"
-import NLink from "next/link";
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { RedirectingButton } from "./Buttons";
 
 interface NavBarProps {
 
@@ -12,6 +14,8 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     
     const [{data, fetching}] = useMeQuery();
     const [{fetching: logoutFetching}, logout] = useLogoutMutation();
+    const [loading, setloading] = useState(false);
+    const router = useRouter();
 
     let body = null;
 
@@ -21,19 +25,31 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     } else if (!data?.me) {
         body = (
         <>
-            <Flex mr={1500}>
+            <HStack spacing="20px">
                 <Box>
-                    <NLink href="/login">
-                    <Link mr={3}>Login</Link>
-                    </NLink>
+                    <RedirectingButton
+                        text='Login'
+                        loadingText='loading'
+                        route='/login'
+                        state={loading}
+                        setState={setloading}
+                        router={router}
+                        color='linkedin'
+                    />
                 </Box>
                 
-                <Box>
-                    <NLink href="/register">
-                        <Link mr={3}>Register</Link>
-                    </NLink>
+                <Box >
+                    <RedirectingButton
+                        text='Register  '
+                        loadingText='loading'
+                        route='/register'
+                        state={loading}
+                        setState={setloading}
+                        router={router}
+                        color='linkedin'
+                    />
                 </Box>
-            </Flex>
+            </HStack>
         </>
         )
     // user is logged in
@@ -64,8 +80,8 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     // handle three states for logged in or not
 
     return (
-        <Flex bg="grey" p={6} >
-            <Box ml={'auto'}>
+        <Flex bg="#E7DFC6" p={6} >
+            <Box mr={'auto'}>
                 {body}
             </Box>
         </Flex>
