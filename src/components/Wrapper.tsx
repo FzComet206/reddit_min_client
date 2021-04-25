@@ -8,8 +8,10 @@ interface WrapperProps {
 export const Wrapper: React.FC<WrapperProps> = ({ children, variant='regular'}) => {
     return (
         <Box 
+            paddingLeft={3}
+            paddingRight={3}
             mx="auto"
-            mt={8}
+            mt={5}
             maxW={variant === "regular" ? "800px" : "400px"}
             width="100%"
         >

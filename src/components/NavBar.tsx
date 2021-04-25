@@ -55,8 +55,8 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     // user is logged in
     } else {
         body = (
-            <Box mr={1500}>
-
+            // <Box mr={1500}>
+            <>
                 <Box fontSize="2xl">
                     ID: {data.me.id}
                 </Box>
@@ -73,15 +73,15 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
                         Logout
                     </Button> 
                 </Box>
-
-            </Box>
+            </>
+            // </Box>
         )
     }
     // handle three states for logged in or not
 
     return (
-        <Flex bg="#E7DFC6" p={6} >
-            <Box mr={'auto'}>
+        <Flex bg="#E7DFC6" p={5} borderRadius="lg">
+            <Box mr={3}>
                 {body}
             </Box>
         </Flex>
