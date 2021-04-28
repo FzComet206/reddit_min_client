@@ -1,5 +1,5 @@
 
-import { Box, Button, Flex, HStack } from "@chakra-ui/react"
+import { Box, Button, HStack, Skeleton } from "@chakra-ui/react"
 import React from "react"
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 import { useRouter } from "next/router";
@@ -21,7 +21,10 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 
     // data is loading
     if (fetching) {
-    // user not logged in
+        body = (
+            <Skeleton height="40px"></Skeleton>
+        )
+        // owo
     } else if (!data?.me) {
         body = (
         <>
@@ -29,7 +32,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
                 <Box>
                     <RedirectingButton
                         text='Login'
-                        loadingText='loading'
+                        loadingText=''
                         route='/login'
                         state={loading}
                         setState={setloading}
@@ -41,7 +44,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
                 <Box >
                     <RedirectingButton
                         text='Register  '
-                        loadingText='loading'
+                        loadingText=''
                         route='/register'
                         state={loading}
                         setState={setloading}
@@ -80,10 +83,12 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     // handle three states for logged in or not
 
     return (
-        <Flex bg="#E7DFC6" p={5} borderRadius="lg">
-            <Box mr={3}>
+        <Box bg="#4E598C" p={5} borderRadius="lg" mr={2} ml={2}>
+
+            <Skeleton isLoaded={!fetching} transition="ease-out">
                 {body}
-            </Box>
-        </Flex>
+            </Skeleton>
+
+        </Box>
     )
 }

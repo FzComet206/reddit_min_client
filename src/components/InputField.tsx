@@ -16,12 +16,12 @@ export const InputField: React.FC<InputFieldProps> = ({label, size: _, ...props}
     const [field, { error }] = useField(props);
     return (
         <FormControl isInvalid={!!error}>
-            <FormLabel htmlFor={field.name}>
+            <FormLabel htmlFor={field.name} textColor="whiteAlpha.900">
                 {label}
             </FormLabel>
             <Input {...field} {...props} id={field.name} />
 
-            {error? <FormErrorMessage>{error}</FormErrorMessage> : null}
+            {error? <FormErrorMessage color="yellow.300">{error}</FormErrorMessage> : null}
 
         </FormControl>
     )

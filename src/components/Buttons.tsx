@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/react"
 import { NextRouter } from "next/router"
 import React from "react"
+import { HashLoader } from "react-spinners";
 
 type ButtonProps = {
     text: string,
@@ -21,7 +22,9 @@ export const RedirectingButton: React.FC<ButtonProps> = ({text, route, color, lo
         }}  
         isLoading={state}
         loadingText={loadingText}
-        colorScheme={color}>  
+        colorScheme={color}
+        spinner={<HashLoader size={25} color="white" />}
+        >  
             {text}
     </Button>
     )

@@ -1,17 +1,15 @@
+import { Flex } from '@chakra-ui/react';
 import React from 'react';
-import { ImageBox } from '../components/imageBox';
-import { NavBar } from '../components/NavBar';
-import { Wrapper } from '../components/Wrapper';
+
+import { MainBody } from '../components/MainBody';
+
+
 
 const Index = () => {
     return (
-        <Wrapper variant='small'>
-            <NavBar/>
-            <ImageBox 
-                url="/ohh.gif"
-                alt="xdd"
-            ></ImageBox>
-        </Wrapper>
+        <Flex bgColor="silver">
+            <MainBody/>
+        </Flex>
     )
 };
 export default Index;

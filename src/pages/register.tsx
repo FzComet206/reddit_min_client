@@ -1,7 +1,7 @@
 import { Wrapper } from '../components/Wrapper';
 import { InputField } from '../components/InputField';
 
-import { Box, Button } from "@chakra-ui/react"
+import { Box, Button, Flex } from "@chakra-ui/react"
 import { Formik, Form } from 'formik';
 import React, { useState } from 'react';
 ;
@@ -20,66 +20,72 @@ const Register: React.FC<registerProps> = ({}) => {
     const [loading, setloading] = useState(false);
     
     return (
-        <Wrapper variant='small'>
+        <Flex bgColor="silver" height="1500">
+            <Wrapper variant='small'>
 
-            <Box>
-                <RedirectingButton
-                        text='Back to main'
-                        loadingText='Redirecting'
-                        route='/'
-                        state={loading}
-                        setState={setloading}
-                        router={router}
-                        color='linkedin'
-                />
-            </Box>
+                <Box mb="50px">
+                    <RedirectingButton
+                            text='Back to main'
+                            loadingText='Redirecting'
+                            route='/'
+                            state={loading}
+                            setState={setloading}
+                            router={router}
+                            color='linkedin'
+                    />
+                </Box>
 
-            <Formik initialValues={{ username: "", password: "" }}
+                <Formik initialValues={{ username: "", password: "" }}
 
-                    onSubmit={ async (values, { setErrors })=>{  // formik seterrors
+                        onSubmit={ async (values, { setErrors })=>{  // formik seterrors
 
-                        const response = await register(values);
+                            const response = await register(values);
 
-                        if (response.data?.register.errors) {  // tsconfig srtict: true enables optional chaining which grants ? if necssary
-                            setErrors(toErrorMap(response.data.register.errors))
-                        } else {
-                            console.log("navigating to landing page")
-                            router.push("/")
-                        }
-                    }}>
+                            if (response.data?.register.errors) {  // tsconfig srtict: true enables optional chaining which grants ? if necssary
+                                setErrors(toErrorMap(response.data.register.errors))
+                            } else {
+                                console.log("navigating to landing page")
+                                router.push("/")
+                            }
+                        }}>
 
-                {({isSubmitting}) => (
-                    <Form>
-                        <Box mt={4}>
+                    {({isSubmitting}) => (
+                        <Form>
+                            <Box mt={5}>
 
-                            <InputField 
-                                name="username"
-                                placeholder="username"
-                                label="Username"
-                            ></InputField>
-                            
-                            <InputField 
-                                name="password"
-                                placeholder="password"
-                                label="Password"
-                                type="password"
-                            ></InputField>
+                                <InputField 
+                                    name="username"
+                                    placeholder="username"
+                                    label="Username"
+                                    color="white"
+                                ></InputField>
+                                
+                                <Box paddingTop="20px"/>
 
-                        </Box>
-                        <Box marginTop={3}>
-                            <Button 
-                                type="submit" 
-                                colorScheme='linkedin'
-                                isLoading={isSubmitting}
-                                >
-                                Register
-                            </Button>
-                        </Box>
-                    </Form>
-                )}
+                                <InputField 
+                                    name="password"
+                                    placeholder="password"
+                                    label="Password"
+                                    type="password"
+                                    color="white"
+                                ></InputField>
 
-            </Formik>
-        </Wrapper>
+                            </Box>
+                            <Box marginTop={5}>
+                                <Button 
+                                    type="submit" 
+                                    colorScheme='linkedin'
+                                    isLoading={isSubmitting}
+                                    >
+                                    Register
+                                </Button>
+                            </Box>
+                        </Form>
+                    )}
+
+                </Formik>
+            </Wrapper>
+        </Flex>
     );
 
 }
