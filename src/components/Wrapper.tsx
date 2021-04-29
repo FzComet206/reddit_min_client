@@ -9,13 +9,11 @@ export const Wrapper: React.FC<WrapperProps> = ({ children, variant='regular'}) 
     return (
         <Box 
             padding="40px"
-            borderRadius="lg"
             mx="auto"
-            mt={5}
-            height="800px"
+            height="1500px"
             maxW={variant === "regular" ? "800px" : "400px"}
             width="100%"
-            bgColor="#666686"
+            bgColor="#566680"
         >
             {children}
         </Box>

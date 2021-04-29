@@ -5,6 +5,7 @@ import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { RedirectingButton } from "./Buttons";
+import { isServer } from "../utils/isServer";
 
 interface NavBarProps {
 
@@ -12,7 +13,9 @@ interface NavBarProps {
 
 export const NavBar: React.FC<NavBarProps> = ({}) => {
     
-    const [{data, fetching}] = useMeQuery();
+    const [{data, fetching}] = useMeQuery({
+        pause: isServer(),
+    });
     const [{fetching: logoutFetching}, logout] = useLogoutMutation();
     const [loading, setloading] = useState(false);
     const router = useRouter();

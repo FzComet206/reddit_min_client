@@ -12,11 +12,11 @@ export const MainBody: React.FC<{}> = () => {
             maxWidth="1200px"
             width="100%"   
         >
-            <Box width="300px" minWidth="80px"  float="left" mt={1} mr={1}>
+            <Box width="250px" minWidth="80px"  float="left" mt={1} mr={1}>
                 <LeftBar/>
             </Box>
 
-            <Box width="900px" minWidth="200px" float="right" mt={1}>
+            <Box width="950px" minWidth="200px" float="right" mt={1}>
                 <CenterBody/>
             </Box>
 
