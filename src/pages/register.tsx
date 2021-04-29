@@ -28,7 +28,7 @@ const Register: React.FC<registerProps> = ({}) => {
         <Flex bgColor="silver" height="1500">
             <Wrapper variant='small'>
 
-                <Box mb="50px">
+                <Box mb="30px">
                     <RedirectingButton
                             text='Back to main'
                             loadingText='Redirecting'
@@ -40,11 +40,11 @@ const Register: React.FC<registerProps> = ({}) => {
                     />
                 </Box>
 
-                <Formik initialValues={{ username: "", password: "" }}
+                <Formik initialValues={{ username: "", email: "", password: "" , confirmPassword: ""}}
 
                         onSubmit={ async (values, { setErrors })=>{  // formik seterrors
 
-                            const response = await register(values);
+                            const response = await register({options: values});
 
                             if (response.data?.register.errors) {  // tsconfig srtict: true enables optional chaining which grants ? if necssary
                                 setErrors(toErrorMap(response.data.register.errors))
@@ -68,6 +68,15 @@ const Register: React.FC<registerProps> = ({}) => {
                                 <Box paddingTop="20px"/>
 
                                 <InputField 
+                                    name="email"
+                                    placeholder="email"
+                                    label="Email"
+                                    color="white"
+                                ></InputField>
+
+                                <Box paddingTop="20px"/>
+
+                                <InputField 
                                     name="password"
                                     placeholder="password"
                                     label="Password"
@@ -75,8 +84,19 @@ const Register: React.FC<registerProps> = ({}) => {
                                     color="white"
                                 ></InputField>
 
+                                <Box paddingTop="20px"/>
+
+                                <InputField 
+                                    name="confirmPassword"
+                                    placeholder="confirm password"
+                                    label="Confirm"
+                                    type="password"
+                                    color="white"
+                                ></InputField>
+
                             </Box>
-                            <Box marginTop={5}>
+
+                            <Box marginTop={8}>
                                 <Button 
                                     type="submit" 
                                     colorScheme='linkedin'

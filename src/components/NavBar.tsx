@@ -68,7 +68,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
                 </Box>
 
                 <Box fontSize="2xl">
-                    {data.me.username}
+                    {data.me.nickname}
                 </Box>
 
                 <Box mt={3}>

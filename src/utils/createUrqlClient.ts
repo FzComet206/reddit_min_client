@@ -7,7 +7,7 @@ import config from '../config';
 
 export const createUrqlClient = (ssrExchange: any) => ({
 
-    url: `${config.serverip}:${config.serverport}/graphql`,
+    url: `${config.serveripdev}:${config.serverport}/graphql`,
 
     fetchOptions: {
         credentials: 'include' as const,

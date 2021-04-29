@@ -27,7 +27,7 @@ const Login: React.FC<{}> = ({}) => {
         <Flex bgColor="silver" height="1500">
             <Wrapper variant='small'>
 
-                <Box mb="50px">
+                <Box mb="30px">
                     <RedirectingButton
                             text='Back to main'
                             loadingText='Redirecting'
@@ -39,7 +39,7 @@ const Login: React.FC<{}> = ({}) => {
                     />
                 </Box>
 
-                <Formik initialValues={{ username: "", password: "" }}
+                <Formik initialValues={{ usernameOrEmail: "", password: "" }}
 
                         onSubmit={ async (values, { setErrors })=>{  // formik seterrors
 
@@ -58,7 +58,7 @@ const Login: React.FC<{}> = ({}) => {
                             <Box mt={5}>
 
                                 <InputField 
-                                    name="username"
+                                    name="usernameOrEmail"    // this must equal to fieldname
                                     placeholder="username"
                                     label="Username"
                                     color="white"
@@ -75,7 +75,7 @@ const Login: React.FC<{}> = ({}) => {
                                 ></InputField>
 
                             </Box>
-                            <Box marginTop={5}>
+                            <Box marginTop={8}>
                                 <Button 
                                     type="submit" 
                                     colorScheme='linkedin'
