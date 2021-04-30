@@ -1,5 +1,5 @@
 
-import { Box, Button, ChakraComponent, Flex, HStack, Input, Menu, MenuButton, MenuItem, MenuList, Skeleton, Wrap } from "@chakra-ui/react"
+import { Box, Button, Flex, HStack, Input, Menu, MenuButton, MenuItem, MenuList, Skeleton } from "@chakra-ui/react"
 import React from "react"
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 import { useRouter } from "next/router";
@@ -7,7 +7,6 @@ import { useState } from "react";
 import { RedirectingButton } from "./Buttons";
 import { isServer } from "../utils/isServer";
 import { InfoIcon, SettingsIcon } from "@chakra-ui/icons";
-import { InputType } from "node:zlib";
 
 interface NavBarProps {
 }
