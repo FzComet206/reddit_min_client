@@ -1,34 +1,40 @@
 
-import { Box, Button, Flex, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Skeleton } from "@chakra-ui/react"
+import { Box, Button, ChakraComponent, Flex, HStack, Input, Menu, MenuButton, MenuItem, MenuList, Skeleton, Wrap } from "@chakra-ui/react"
 import React from "react"
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { RedirectingButton } from "./Buttons";
 import { isServer } from "../utils/isServer";
-import { ChevronDownIcon, HamburgerIcon, InfoIcon, SettingsIcon } from "@chakra-ui/icons";
+import { InfoIcon, SettingsIcon } from "@chakra-ui/icons";
+import { InputType } from "node:zlib";
 
 interface NavBarProps {
-
 }
 
 export const NavBar: React.FC<NavBarProps> = ({}) => {
     
+    // self query
     const [{data, fetching}] = useMeQuery({
         pause: isServer(),
     });
-    const [{fetching: logoutFetching}, logout] = useLogoutMutation();
+
+    // loading and routing
+    const [, logout] = useLogoutMutation();
     const [loading, setloading] = useState(false);
     const router = useRouter();
+    
+    // todo: search bar
+    const [value, setValue] = useState("")
+    const handleChange = (event:React.FormEvent<HTMLInputElement>) => setValue(event.currentTarget.value)
 
     let body = null;
 
-    // data is loading
     if (fetching) {
         body = (
             <Skeleton height="40px"></Skeleton>
         )
-        // owo
+    // data is loading
     } else if (!data?.me) {
         body = (
         <>
@@ -63,21 +69,11 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     // user is logged in
     } else {
         body = (
-            // <Box mr={1500}>
             <>
-                <HStack spacing="30px">
+                <HStack spacing="20px">
                     <Box fontSize="25px" fontWeight="semibold" textColor="whiteAlpha.800">
                         {data.me.nickname}
                     </Box>
-
-                    {/* <Box>
-                        <Button colorScheme="linkedin" onClick={()=>{
-                            logout()
-                            console.log("logged out")    // need to update cache
-                        }} isLoading={logoutFetching}>  
-                            Logout
-                        </Button> 
-                    </Box> */}
 
                     <Menu>
 
@@ -85,7 +81,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
                             as={Button}
                             rightIcon={<SettingsIcon />} 
                             colorScheme="linkedin" 
-                            fontSize="17px"
+                            fontSize="15px"
                         >Options</MenuButton>
 
                         <MenuList>
@@ -98,7 +94,6 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
                     </Menu>
                 </HStack>
             </>
-            // </Box>
         )
     }
     // handle three states for logged in or not
@@ -106,17 +101,33 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     return (
         <Flex bg="#4E598C" p={5} borderRadius="lg" mr="5px" ml="5px">
 
-            <Flex width="650px">
-                
+            <Flex width="80%">
+
                 <Box 
                     textColor="whiteAlpha.800" 
                     paddingTop="2px" 
                     fontWeight="semibold" 
                     fontSize="25px"
-                    paddingLeft="20px"
-                >Li-reddit</Box>
-            </Flex>
+                    paddingLeft="5px"
+                >Cl Reddit
+                </Box>
 
+                <Box
+                    bgColor="whiteAlpha.100"
+                    mx="auto"
+                    width="70%"
+                >
+                    <Input
+                        value={value}
+                        onChange={handleChange}
+                        placeholder="Search for posts"
+                        size="md"
+                        textColor="whiteAlpha.800"
+                    />
+                </Box>
+
+            </Flex>
+            
             <Skeleton isLoaded={!fetching} transition="ease-out">
                 {body}
             </Skeleton>

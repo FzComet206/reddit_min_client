@@ -9,14 +9,14 @@ export const MainBody: React.FC<{}> = () => {
             paddingLeft={1}
             paddingRight={1}
             mx="auto"
-            maxWidth="1200px"
+            maxWidth="65%"
             width="100%"   
         >
-            <Box width="250px" minWidth="80px"  float="left" mt={1} mr={1}>
+            <Box width="10%" minWidth="80px"  float="left" mt={1} mr={1}>
                 <LeftBar/>
             </Box>
 
-            <Box width="950px" minWidth="200px" float="right" mt={1} alignSelf="center">
+            <Box width="90%" minWidth="200px" float="right" mt={1} alignSelf="center">
                 <CenterBody/>
             </Box>
 
