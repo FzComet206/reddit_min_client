@@ -111,11 +111,12 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
                 </Box>
 
                 <Box
-                    bgColor="whiteAlpha.100"
                     mx="auto"
                     width="70%"
+                    ml="30px"
                 >
                     <Input
+                        bgColor="whiteAlpha.100"
                         value={value}
                         onChange={handleChange}
                         placeholder="Search for posts"
