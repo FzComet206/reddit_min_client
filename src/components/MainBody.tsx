@@ -16,7 +16,7 @@ export const MainBody: React.FC<{}> = () => {
                 <LeftBar/>
             </Box>
 
-            <Box width="950px" minWidth="200px" float="right" mt={1}>
+            <Box width="950px" minWidth="200px" float="right" mt={1} alignSelf="center">
                 <CenterBody/>
             </Box>
 

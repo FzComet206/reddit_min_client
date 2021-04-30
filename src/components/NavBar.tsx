@@ -1,11 +1,12 @@
 
-import { Box, Button, HStack, Skeleton } from "@chakra-ui/react"
+import { Box, Button, Flex, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Skeleton } from "@chakra-ui/react"
 import React from "react"
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { RedirectingButton } from "./Buttons";
 import { isServer } from "../utils/isServer";
+import { ChevronDownIcon, HamburgerIcon, InfoIcon, SettingsIcon } from "@chakra-ui/icons";
 
 interface NavBarProps {
 
@@ -32,6 +33,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         body = (
         <>
             <HStack spacing="20px">
+
                 <Box>
                     <RedirectingButton
                         text='Login'
@@ -44,9 +46,9 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
                     />
                 </Box>
                 
-                <Box >
+                <Box>
                     <RedirectingButton
-                        text='Register  '
+                        text='Register'
                         loadingText=''
                         route='/register'
                         state={loading}
@@ -63,22 +65,38 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         body = (
             // <Box mr={1500}>
             <>
-                <Box fontSize="2xl">
-                    ID: {data.me.id}
-                </Box>
+                <HStack spacing="30px">
+                    <Box fontSize="25px" fontWeight="semibold" textColor="whiteAlpha.800">
+                        {data.me.nickname}
+                    </Box>
 
-                <Box fontSize="2xl">
-                    {data.me.nickname}
-                </Box>
+                    {/* <Box>
+                        <Button colorScheme="linkedin" onClick={()=>{
+                            logout()
+                            console.log("logged out")    // need to update cache
+                        }} isLoading={logoutFetching}>  
+                            Logout
+                        </Button> 
+                    </Box> */}
 
-                <Box mt={3}>
-                    <Button onClick={()=>{
-                        logout()
-                        console.log("logged out")    // need to update cache
-                    }} isLoading={logoutFetching}>  
-                        Logout
-                    </Button> 
-                </Box>
+                    <Menu>
+
+                        <MenuButton 
+                            as={Button}
+                            rightIcon={<SettingsIcon />} 
+                            colorScheme="linkedin" 
+                            fontSize="17px"
+                        >Options</MenuButton>
+
+                        <MenuList>
+                            <MenuItem
+                                onClick={() => logout()}
+                                icon={<InfoIcon />}
+                            >Logout</MenuItem>
+                        </MenuList>
+
+                    </Menu>
+                </HStack>
             </>
             // </Box>
         )
@@ -86,12 +104,23 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     // handle three states for logged in or not
 
     return (
-        <Box bg="#4E598C" p={5} borderRadius="lg" mr={2} ml={2}>
+        <Flex bg="#4E598C" p={5} borderRadius="lg" mr="5px" ml="5px">
+
+            <Flex width="650px">
+                
+                <Box 
+                    textColor="whiteAlpha.800" 
+                    paddingTop="2px" 
+                    fontWeight="semibold" 
+                    fontSize="25px"
+                    paddingLeft="20px"
+                >Li-reddit</Box>
+            </Flex>
 
             <Skeleton isLoaded={!fetching} transition="ease-out">
                 {body}
             </Skeleton>
 
-        </Box>
+        </Flex>
     )
 }

@@ -1,4 +1,4 @@
-import { Box, Skeleton } from "@chakra-ui/react"
+import { Box, Flex, Skeleton, Wrap } from "@chakra-ui/react"
 import React from "react"
 import { NavBar } from "./NavBar"
 
@@ -10,7 +10,7 @@ export const CenterBody: React.FC<{}> = () => {
     )
 
     return (
-        <Box bg="#F6BD60" minWidth="100px" borderRadius="md" height="1500">
+        <Box bg="#F6BD60" minWidth="300px" borderRadius="md" height="1500">
 
             <Box paddingTop={2}/>
 
