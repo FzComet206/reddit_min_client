@@ -105,10 +105,9 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 
                 <Box 
                     textColor="whiteAlpha.800" 
-                    paddingTop="2px" 
                     fontWeight="semibold" 
                     fontSize="25px"
-                    paddingLeft="5px"
+                    mx="auto"
                 >Cl Reddit
                 </Box>
 
@@ -128,9 +127,11 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 
             </Flex>
             
-            <Skeleton isLoaded={!fetching} transition="ease-out">
-                {body}
-            </Skeleton>
+            <Box width="280px" ml="30px">
+                <Skeleton isLoaded={!fetching} transition="ease-out">
+                    {body}
+                </Skeleton>
+            </Box>
 
         </Flex>
     )
