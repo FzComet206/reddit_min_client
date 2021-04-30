@@ -1,4 +1,4 @@
-import { Box, Flex, Skeleton, Wrap } from "@chakra-ui/react"
+import { Box, Flex, Skeleton} from "@chakra-ui/react"
 import React from "react"
 import { NavBar } from "./NavBar"
 
