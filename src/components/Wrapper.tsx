@@ -10,7 +10,8 @@ export const Wrapper: React.FC<WrapperProps> = ({ children, variant='regular'}) 
         <Box 
             padding="40px"
             mx="auto"
-            height="1500px"
+            height="100%"
+            overflow="auto"
             maxW={variant === "regular" ? "800px" : "400px"}
             width="100%"
             bgColor="#566680"

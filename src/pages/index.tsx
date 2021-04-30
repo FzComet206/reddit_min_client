@@ -4,6 +4,7 @@ import { withUrqlClient } from 'next-urql';
 
 import { MainBody } from '../components/MainBody';
 import { createUrqlClient } from '../utils/createUrqlClient';
+import { usePostsQuery } from '../generated/graphql';
 
 
 const Index = () => {

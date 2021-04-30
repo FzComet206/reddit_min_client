@@ -23,10 +23,13 @@ export const CenterBody: React.FC<{}> = () => {
                     mr='5px'
                     mt='5px'
                     bg="#AAAAAA" 
-                    height="100%"
+
                     width="75%" 
                     float="left" 
                     borderRadius="md"
+
+                    height="100%"
+                    overflow="auto"
 
                     >   
                     {sk}
@@ -41,11 +44,17 @@ export const CenterBody: React.FC<{}> = () => {
                     mr="5px"
                     mt='5px'
                     bg="#8A7968" 
-                    height="1410px"
+
                     width="25%"
                     float="right"
                     borderRadius="md"
+
+                    height="100%"
+                    overflow="auto"
                     >
+                    {sk}
+                    {sk}
+                    {sk}
                     {sk}
                     {sk}
                 </Box>

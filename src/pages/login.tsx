@@ -1,10 +1,11 @@
 // Libraries
 import React from 'react';
 import { useState } from 'react';
-import { Box, Button, Flex } from "@chakra-ui/react"
+import { Box, Button, Flex, Link } from "@chakra-ui/react"
 import { Formik, Form } from 'formik';
 import { withUrqlClient } from 'next-urql';
 import { useRouter } from "next/router";
+import NextLink from 'next/link';
 
 // React Components
 import { Wrapper } from '../components/Wrapper';
@@ -75,15 +76,24 @@ const Login: React.FC<{}> = ({}) => {
                                 ></InputField>
 
                             </Box>
-                            <Box marginTop={8}>
-                                <Button 
-                                    type="submit" 
-                                    colorScheme='linkedin'
-                                    isLoading={isSubmitting}
-                                    >
-                                    Login
-                                </Button>
-                            </Box>
+
+                            <Flex>
+                                <Box marginTop="30px">
+                                    <Button 
+                                        type="submit" 
+                                        colorScheme='linkedin'
+                                        isLoading={isSubmitting}
+                                        >
+                                        Login
+                                    </Button>
+                                </Box>
+                                <NextLink href="/forgot-password">
+                                    <Link ml="auto" mt="30px" color="white">
+                                        Forgot Password?
+                                    </Link>
+                                </NextLink>
+                            </Flex>
+
                         </Form>
                     )}
 

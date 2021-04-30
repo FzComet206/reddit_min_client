@@ -10,7 +10,7 @@ export const LeftBar = () => {
         </Box>)
 
     return (
-        <Box minWidth="60px" borderRadius="md" bgColor="#465362" height="1500px">
+        <Box minWidth="60px" borderRadius="md" bgColor="#465362" height="100%" overflow="auto">
             <Box paddingTop="30px" paddingRight={2} paddingLeft={2} paddingBottom={3}>
                 <Stack>
                     {sk}

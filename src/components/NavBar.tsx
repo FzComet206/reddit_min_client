@@ -38,7 +38,6 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         body = (
         <>
             <HStack spacing="20px">
-
                 <Box>
                     <RedirectingButton
                         text='Login'
@@ -70,7 +69,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         body = (
             <>
                 <HStack spacing="20px">
-                    <Box fontSize="25px" fontWeight="semibold" textColor="whiteAlpha.800">
+                    <Box fontSize="20px" fontWeight="semibold" textColor="whiteAlpha.800">
                         {data.me.nickname}
                     </Box>
 
@@ -113,7 +112,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
                 <Box
                     mx="auto"
                     width="70%"
-                    ml="30px"
+                    paddingleft="20px"
                 >
                     <Input
                         bgColor="whiteAlpha.100"
@@ -127,11 +126,11 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 
             </Flex>
             
-            <Box width="280px" ml="30px">
+            <Flex width="300px" ml="20px" justifyContent="flex-end">
                 <Skeleton isLoaded={!fetching} transition="ease-out">
                     {body}
                 </Skeleton>
-            </Box>
+            </Flex>
 
         </Flex>
     )
