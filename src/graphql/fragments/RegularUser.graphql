@@ -1,6 +1,6 @@
 fragment RegularUser on OpUsers {
-    id
-    nickname
-    username
-    createdAt
+	id
+	nickname
+	username
+	createdAt
 }
