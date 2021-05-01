@@ -14,11 +14,11 @@ export const MainBody: React.FC<{}> = () => {
 			height="100%"
 			overflow="auto"
 		>
-			<Box width="10%" minWidth="100px" float="left" mt={1} mr={1}>
+			<Box width="7%" float="left" mt={1} mr={1}>
 				<LeftBar />
 			</Box>
 
-			<Box width="90%" minWidth="900px" float="right" mt={1}>
+			<Box width="93%" minWidth="900px" float="right" mt={1}>
 				<CenterBody />
 			</Box>
 		</Flex>

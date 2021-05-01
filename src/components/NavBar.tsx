@@ -110,7 +110,8 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 	// handle three states for logged in or not
 
 	return (
-		<Flex bg="#4E598C" p={5} borderRadius="lg" mr="5px" ml="5px">
+		// #4E598C the blue
+		<Flex p={5} borderRadius="lg" mr="5px" ml="5px">
 			<Flex width="80%">
 				<Box
 					textColor="whiteAlpha.800"
