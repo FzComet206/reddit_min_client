@@ -13,6 +13,7 @@ const ForgotPassword: React.FC<{}> = ({}) => {
 	const [, sendEmail] = useForgotPasswordMutation();
 	const [loading, setloading] = useState(false);
 	const [sent, setSent] = useState(false);
+	const [Error, setError] = useState(false);
 
 	return (
 		<Flex bgColor="silver" height="1500">
@@ -21,9 +22,17 @@ const ForgotPassword: React.FC<{}> = ({}) => {
 					initialValues={{ email: "" }}
 					onSubmit={async (values) => {
 						// formik seterrors
-						await sendEmail(values);
-						setSent(true);
-						console.log("navigating to landing page");
+						if (
+							values.email.length === 0 ||
+							!values.email.includes("@")
+						) {
+							setError(true);
+						} else {
+							setError(false);
+							await sendEmail(values);
+							setSent(true);
+							console.log("navigating to landing page");
+						}
 					}}
 				>
 					{({ isSubmitting }) => (
@@ -48,6 +57,19 @@ const ForgotPassword: React.FC<{}> = ({}) => {
 									color="white"
 								></InputField>
 							</Box>
+
+							{Error ? (
+								<Box
+									height="25px"
+									bgColor="red.400"
+									mt="10px"
+									borderRadius="md"
+									textAlign="center"
+									textColor="white"
+								>
+									Please Enter a valid email address
+								</Box>
+							): null}
 
 							{sent ? (
 								<Box

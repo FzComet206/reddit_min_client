@@ -37,7 +37,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 		setValue(event.currentTarget.value);
 
 	let body = null;
-
+	
 	if (fetching) {
 		body = <Skeleton height="40px"></Skeleton>;
 		// data is loading
