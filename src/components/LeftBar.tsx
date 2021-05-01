@@ -5,9 +5,10 @@ export const LeftBar = () => {
 
 	return (
 		<Box
+			// the blue #465362
 			minWidth="40px"
 			borderRadius="md"
-			bgColor="#465362"
+			bgColor="#474647"
 			height="100%"
 			overflow="auto"
 		>

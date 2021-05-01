@@ -11,8 +11,8 @@ export const CenterBody: React.FC<{}> = () => {
 
 	return (
 		// #F6BD60 the yellow
-		// the green
-		<Box bg="#2C2F33" minWidth="300px" borderRadius="md" height="1500" paddingRight="5px">
+		// #2C2F33 discord dark
+		<Box bg="#2C2F38" minWidth="300px" borderRadius="md" height="1500" paddingRight="5px">
 			<Box paddingTop={1} />
 
 			<NavBar></NavBar>

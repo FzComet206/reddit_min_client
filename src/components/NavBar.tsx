@@ -116,13 +116,13 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 				<Box
 					textColor="whiteAlpha.800"
 					fontWeight="semibold"
-					fontSize="25px"
+					fontSize="30px"
 					mx="auto"
 				>
 					Cl Reddit
 				</Box>
 
-				<Box mx="auto" width="70%" paddingleft="20px">
+				<Box mx="auto" width="70%" paddingleft="20px" paddingTop="5px">
 					<Input
 						bgColor="whiteAlpha.100"
 						value={value}
@@ -134,7 +134,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 				</Box>
 			</Flex>
 
-			<Flex width="300px" ml="20px" justifyContent="flex-end">
+			<Flex width="300px" ml="20px" justifyContent="flex-end" paddingTop="5px">
 				<Skeleton isLoaded={!fetching} transition="ease-out">
 					{body}
 				</Skeleton>
