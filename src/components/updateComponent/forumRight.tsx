@@ -7,11 +7,11 @@ export const ForumRight: React.FC<fRight> = () => {
 	return (
 		<Box
 			paddingRight="10px"
-			mt="20px"
+			mt="10px"
 			width="25%"
 			float="right"
 			borderRadius="md"
-			height="88vh"
+			height="90vh"
 			overflow="auto"
 			textColor="white"
 			css={{
