@@ -4,12 +4,11 @@ import { withUrqlClient } from "next-urql";
 
 import { MainBody } from "../components/MainBody";
 import { createUrqlClient } from "../utils/createUrqlClient";
-import { usePostsQuery } from "../generated/graphql";
 
 const Index = () => {
 	// const [{data}] = usePostsQuery();
 	return (
-		<Flex bgColor="silver">
+		<Flex bgColor="silver" height="100vh">
 			{/* {!data ? null: data.posts?.map(p=><div key={p.id}>{p.title}</div>)} */}
 			<MainBody />
 		</Flex>

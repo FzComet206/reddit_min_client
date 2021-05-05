@@ -11,11 +11,11 @@ import {
 	Skeleton,
 } from "@chakra-ui/react";
 import React from "react";
-import { useLogoutMutation, useMeQuery } from "../generated/graphql";
+import { useLogoutMutation, useMeQuery } from "../../generated/graphql";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { RedirectingButton } from "./Buttons";
-import { isServer } from "../utils/isServer";
+import { RedirectingButton } from "../Buttons";
+import { isServer } from "../../utils/isServer";
 import { InfoIcon, SettingsIcon } from "@chakra-ui/icons";
 
 interface NavBarProps {}
@@ -37,7 +37,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 		setValue(event.currentTarget.value);
 
 	let body = null;
-	
+
 	if (fetching) {
 		body = <Skeleton height="40px"></Skeleton>;
 		// data is loading
@@ -111,7 +111,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 
 	return (
 		// #4E598C the blue
-		<Flex p={5} borderRadius="lg" mr="5px" ml="5px">
+		<Flex p={3} borderRadius="lg" mr="5px" ml="5px">
 			<Flex width="80%">
 				<Box
 					textColor="whiteAlpha.800"
@@ -134,7 +134,13 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 				</Box>
 			</Flex>
 
-			<Flex width="300px" ml="20px" justifyContent="flex-end" paddingTop="5px">
+			<Flex
+				width="300px"
+				ml="5px"
+				justifyContent="flex-end"
+				mr="20px"
+				paddingTop="5px"
+			>
 				<Skeleton isLoaded={!fetching} transition="ease-out">
 					{body}
 				</Skeleton>

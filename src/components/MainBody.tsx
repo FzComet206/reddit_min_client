@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
-import { LeftBar } from "./LeftBar";
+import { LeftBar } from "./updateComponent/LeftBar";
 import { CenterBody } from "./_centerBody";
 
 export const MainBody: React.FC<{}> = () => {
@@ -11,14 +11,14 @@ export const MainBody: React.FC<{}> = () => {
 			mx="auto"
 			width="65%"
 			minWidth="1000px"
-			height="100%"
+			height="100vh"
 			overflow="auto"
 		>
-			<Box width="7%" float="left" mt={1} mr={1}>
+			<Box width="7%" float="left" mr="3px" overflow="auto">
 				<LeftBar />
 			</Box>
 
-			<Box width="93%" minWidth="900px" float="right" mt={1}>
+			<Box width="93%" minWidth="900px" float="right" >
 				<CenterBody />
 			</Box>
 		</Flex>
