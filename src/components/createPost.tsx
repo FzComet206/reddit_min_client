@@ -14,9 +14,10 @@ import {
 } from "@chakra-ui/react";
 import router from "next/router";
 import React, { useState } from "react";
-import { useMeQuery } from "../generated/graphql";
+import { useCreatePostMutation, useMeQuery } from "../generated/graphql";
 
 export const CreatePost: React.FC<{}> = ({}) => {
+	const [{ fetching }, createPost] = useCreatePostMutation();
 	const [{ data }] = useMeQuery();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const toast = useToast();
@@ -25,6 +26,7 @@ export const CreatePost: React.FC<{}> = ({}) => {
 	let [valueText, setValueText] = useState("");
 
 	const [empty, setEmpty] = useState(false);
+	const [limit, setLimit] = useState(false);
 
 	const onClickPost = () => {
 		if (!data?.me) {
@@ -38,6 +40,7 @@ export const CreatePost: React.FC<{}> = ({}) => {
 		// cache
 		onClose();
 		setEmpty(false);
+		setLimit(false);
 	};
 
 	let handleInputChangeTitle = (e: any) => {
@@ -57,6 +60,11 @@ export const CreatePost: React.FC<{}> = ({}) => {
 			setEmpty(true);
 			return;
 		}
+		if (title.length > 50 || text.length > 800) {
+			setLimit(true);
+			return;
+		}
+		await createPost({ title: title, text: text });
 		toast({ title: "Post Submitted", status: "success", isClosable: true });
 		onClose();
 	};
@@ -88,13 +96,13 @@ export const CreatePost: React.FC<{}> = ({}) => {
 						<Textarea
 							value={valueTitle}
 							onChange={handleInputChangeTitle}
-							placeholder="Enter your title here"
+							placeholder="Enter your title here ---------- word limit: 50"
 						/>
 
 						<Textarea
 							value={valueText}
 							onChange={handleInputChangeText}
-							placeholder="Enter your text here"
+							placeholder="Enter your text here ---------- word limit: 800"
 							size="md"
 							mt="10px"
 							height="300px"
@@ -113,10 +121,29 @@ export const CreatePost: React.FC<{}> = ({}) => {
 								cannot submit empty fields
 							</Box>
 						) : null}
+
+						{limit ? (
+							<Box
+								height="25px"
+								bgColor="red.400"
+								mt="10px"
+								borderRadius="md"
+								textAlign="center"
+								textColor="white"
+							>
+								{" "}
+								title or text exceeded word limit
+							</Box>
+						) : null}
+
 					</ModalBody>
 
 					<ModalFooter>
-						<Button colorScheme="linkedin" mr={3} onClick={onClosePost}>
+						<Button
+							colorScheme="linkedin"
+							mr={3}
+							onClick={onClosePost}
+						>
 							Close
 						</Button>
 
@@ -125,6 +152,7 @@ export const CreatePost: React.FC<{}> = ({}) => {
 							onClick={() => {
 								handleSubmit(valueTitle, valueText);
 							}}
+							isLoading={fetching}
 						>
 							Submit
 						</Button>
