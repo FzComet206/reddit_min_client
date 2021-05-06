@@ -9,7 +9,7 @@ export const CenterBody: React.FC<{}> = () => {
 		// #F6BD60 the yellow
 		// #2C2F33 discord dark
 		<Box
-			bg="#2C2F38"
+			bg="#2C2F48"
 			minWidth="300px"
 			borderRadius="md"
 			height="100vh"

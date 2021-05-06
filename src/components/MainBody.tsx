@@ -9,10 +9,9 @@ export const MainBody: React.FC<{}> = () => {
 			paddingLeft={1}
 			paddingRight={1}
 			mx="auto"
-			width="65%"
-			minWidth="1000px"
+			width="75%"
+			minWidth="1400px"
 			height="100vh"
-			overflow="auto"
 		>
 			<Box width="7%" float="left" mr="3px" overflow="auto">
 				<LeftBar />

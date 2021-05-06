@@ -1,24 +1,20 @@
-import { Box, SkeletonCircle, SkeletonText, Stack } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
+import { CreatePost } from "../createPost";
 
 export const LeftBar = () => {
+	
 	return (
 		<Box
 			// the blue #465362
 			minWidth="40px"
 			borderRadius="md"
-			bgColor="#474647"
+			bgColor="#474650"
 			height="100vh"
 			overflow="auto"
+			p={3}
 		>
-			<Box
-				paddingTop="30px"
-				paddingRight={2}
-				paddingLeft={2}
-				paddingBottom={3}
-			>
-				<Stack></Stack>
-			</Box>
+			<CreatePost/>
 		</Box>
 	);
 };

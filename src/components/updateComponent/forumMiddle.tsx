@@ -13,7 +13,7 @@ export const ForumMiddle: React.FC<fLeft> = () => {
 	};
 
 	let arr = [];
-	for (let index = 0; index < 5; index++) {
+	for (let index = 0; index < 10; index++) {
 		arr.push(sk(index));
 	}
 
@@ -23,7 +23,7 @@ export const ForumMiddle: React.FC<fLeft> = () => {
 			mr="20px"
 			mt="10px"
 			bg="#AAAAAA"
-			width="75%"
+			width="80%"
 			float="left"
 			borderRadius="md"
 			height="90vh"
@@ -49,7 +49,8 @@ export const ForumMiddle: React.FC<fLeft> = () => {
 				fontSize="25px"
 				fontWeight="semibold"
 			>
-					Posts ------------------------------------------------------------------------
+				Posts
+				-------------------------------------------------------------------------------------
 			</Box>
 			{arr}
 		</Box>
