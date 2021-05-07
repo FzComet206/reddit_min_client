@@ -133,7 +133,7 @@ export const CreatePost: React.FC<{}> = ({}) => {
 									});
 								} else {
 									const response = await createPost(values);
-
+									console.log(response)
 									// @ts-ignore: Unreachable code error
 									if (response.data?.createPost.errors) {
 										// lmao fk ts this works
@@ -144,12 +144,25 @@ export const CreatePost: React.FC<{}> = ({}) => {
 											)
 										);
 									} else {
-										toast({
-											title: "Post Submitted",
-											status: "success",
-											isClosable: true,
-										});
-										onClose();
+										if (
+											response.error?.message.includes(
+												"not authenticated"
+											)
+										) {
+											toast({
+												title:
+													"Please login in or register",
+												status: "info",
+												isClosable: true,
+											});
+										} else {
+											toast({
+												title: "Post Submitted",
+												status: "success",
+												isClosable: true,
+											});
+											onClose();
+										}
 									}
 								}
 							}}
@@ -159,7 +172,7 @@ export const CreatePost: React.FC<{}> = ({}) => {
 									<InputField
 										textarea={false}
 										name="title"
-										placeholder="Enter your title here ---------- word limit: 50"
+										placeholder="Enter your title here ---------- character limit: 100"
 										label="Title"
 									></InputField>
 
@@ -167,7 +180,7 @@ export const CreatePost: React.FC<{}> = ({}) => {
 										textarea={true}
 										height="300px"
 										name="text"
-										placeholder="Enter your text here ---------- word limit: 800"
+										placeholder="Enter your text here ---------- character limit: 3000"
 										label="Text"
 									></InputField>
 
@@ -211,9 +224,7 @@ export const CreatePost: React.FC<{}> = ({}) => {
 						Do you want to save as draft?
 					</AlertDialogBody>
 					<AlertDialogFooter>
-						<Button onClick={onClickAlertNo}>
-							No
-						</Button>
+						<Button onClick={onClickAlertNo}>No</Button>
 						<Button
 							ref={cancelRef}
 							colorScheme="red"
