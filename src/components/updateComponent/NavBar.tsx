@@ -14,7 +14,7 @@ import React from "react";
 import { useLogoutMutation, useMeQuery } from "../../generated/graphql";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { RedirectingButton } from "../Buttons";
+import { RedirectingButton } from "../uiComponent/Buttons";
 import { isServer } from "../../utils/isServer";
 import { InfoIcon, SettingsIcon } from "@chakra-ui/icons";
 

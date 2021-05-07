@@ -2,7 +2,7 @@ import React from "react";
 import { Flex } from "@chakra-ui/react";
 import { withUrqlClient } from "next-urql";
 
-import { MainBody } from "../components/MainBody";
+import { MainBody } from "../components/bodyComponent/MainBody";
 import { createUrqlClient } from "../utils/createUrqlClient";
 
 const Index = () => {

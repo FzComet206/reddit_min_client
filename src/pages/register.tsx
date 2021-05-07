@@ -6,9 +6,9 @@ import { useRouter } from "next/router";
 import { withUrqlClient } from "next-urql";
 
 // React Components
-import { Wrapper } from "../components/Wrapper";
-import { InputField } from "../components/InputField";
-import { RedirectingButton } from "../components/Buttons";
+import { Wrapper } from "../components/bodyComponent/Wrapper";
+import { InputField } from "../components/uiComponent/InputField";
+import { RedirectingButton } from "../components/uiComponent/Buttons";
 
 // Utils and Generated
 import { toErrorMap } from "../utils/toErrorMap";

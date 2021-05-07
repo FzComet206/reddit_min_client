@@ -4,6 +4,9 @@ mutation createPost($title: String!, $text: String!) {
           title: $title, 
           text: $text
           }) {
-      title
+  errors {
+    field
+    message
   }
-}
+  success
+}}

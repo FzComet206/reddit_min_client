@@ -22,7 +22,7 @@ export const ForumMiddle: React.FC<fLeft> = () => {
 			ml="20px"
 			mr="20px"
 			mt="10px"
-			bg="#AAAAAA"
+			bg="#CECBC2"
 			width="80%"
 			float="left"
 			borderRadius="md"

@@ -22,7 +22,7 @@ export type FieldError = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createPost: Post;
+  createPost: PostResponse;
   updatePost?: Maybe<Post>;
   deletePost: Scalars['Boolean'];
   forgotPassword: Scalars['Boolean'];
@@ -98,6 +98,12 @@ export type PostInput = {
   text: Scalars['String'];
 };
 
+export type PostResponse = {
+  __typename?: 'PostResponse';
+  errors?: Maybe<Array<FieldError>>;
+  success: Scalars['Boolean'];
+};
+
 export type Query = {
   __typename?: 'Query';
   posts?: Maybe<Array<Post>>;
@@ -168,8 +174,12 @@ export type CreatePostMutationVariables = Exact<{
 export type CreatePostMutation = (
   { __typename?: 'Mutation' }
   & { createPost: (
-    { __typename?: 'Post' }
-    & Pick<Post, 'title'>
+    { __typename?: 'PostResponse' }
+    & Pick<PostResponse, 'success'>
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>> }
   ) }
 );
 
@@ -283,7 +293,11 @@ export function useChangePasswordMutation() {
 export const CreatePostDocument = gql`
     mutation createPost($title: String!, $text: String!) {
   createPost(input: {title: $title, text: $text}) {
-    title
+    errors {
+      field
+      message
+    }
+    success
   }
 }
     `;

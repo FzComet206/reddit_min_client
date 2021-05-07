@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
-import { LeftBar } from "./updateComponent/LeftBar";
+import { LeftBar } from "../updateComponent/LeftBar";
 import { CenterBody } from "./_centerBody";
 
 export const MainBody: React.FC<{}> = () => {
