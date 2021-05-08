@@ -89,7 +89,6 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 							m="auto"
 							isLoading={fetching}
 							onClick={() => {
-								console.log(data)
 								setVariables({
 									limit: variables.limit,
 									// @ts-ignore

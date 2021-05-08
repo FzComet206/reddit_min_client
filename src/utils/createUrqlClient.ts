@@ -51,15 +51,22 @@ const cursorPagination = (): Resolver => {
 			return undefined;
 		}
 
+		// we return results because we found data on cacche, so we need to tell urql when to do a query
+		const fieldKey = `${fieldName}(${stringifyVariables(fieldArgs)})`;
+		const isInTheCache = cache.resolve(entityKey, fieldKey);
+
+		info.partial = !isInTheCache; // cast to boolean
+
 		// we need to check is data is in the cache and return from cache
 		const results: string[] = [];
 		fieldInfos.forEach((fi) => {
 			// from entitykey: query, get fi.fieldkey: posts  'pos{"limit":10}
 			const data = cache.resolve(entityKey, fi.fieldKey) as string[];
-			console.log(data); // array of post ids
+			// array of post ids
 			// loop through all things in cache and compile in list
 			results.push(...data);
 		});
+
 		return results;
 	};
 };
