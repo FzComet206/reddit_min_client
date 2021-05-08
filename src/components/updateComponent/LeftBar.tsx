@@ -10,7 +10,7 @@ export const LeftBar = () => {
 			minWidth="40px"
 			borderRadius="md"
 			//#EDAE49
-			bgColor="#424B54"
+			bgColor="#5C5F63"
 			height="100vh"
 			overflow="auto"
 			p={3}

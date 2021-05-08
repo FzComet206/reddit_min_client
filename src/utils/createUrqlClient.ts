@@ -19,7 +19,7 @@ const errorExchange: Exchange = ({ forward }) => (ops$) => {
 		tap(({ error }) => {
 			if (error) {
 				if (error?.message.includes("not authenticated")) {
-					router.replace("/login")
+					router.replace("/login") // can add query parameters
 				}
 			}
 		}

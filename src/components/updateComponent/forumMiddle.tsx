@@ -1,9 +1,11 @@
 import { Box, Skeleton } from "@chakra-ui/react";
 import React from "react";
 
-interface fLeft {}
+interface formMiddleProps {
+	
+}
 
-export const ForumMiddle: React.FC<fLeft> = () => {
+export const ForumMiddle: React.FC<formMiddleProps> = () => {
 	const sk = (key: number) => {
 		return (
 			<Box key={key} padding="20px">
@@ -19,8 +21,8 @@ export const ForumMiddle: React.FC<fLeft> = () => {
 
 	return (
 		<Box
-			ml="20px"
-			mr="20px"
+			ml="10px"
+			mr="10px"
 			mt="10px"
 			bg="#CECBC2"
 			width="80%"

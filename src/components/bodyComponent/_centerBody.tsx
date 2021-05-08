@@ -9,8 +9,9 @@ export const CenterBody: React.FC<{}> = () => {
 		// #F6BD60 the yellow
 		// #2C2F33 discord dark
 		// #2C2F48
+		// #4D5071
 		<Box
-			bg="#4D5071"
+			bg="#5C5F63"
 			minWidth="300px"
 			borderRadius="md"
 			height="100vh"
