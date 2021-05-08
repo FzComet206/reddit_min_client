@@ -32,7 +32,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 	const router = useRouter();
 
 	// todo: search bar
-	const [value, setValue] = useState("");
+	const [value, setValue] = useState("the search bar is not implemented");
 	const handleChange = (event: React.FormEvent<HTMLInputElement>) =>
 		setValue(event.currentTarget.value);
 

@@ -29,7 +29,7 @@ export const ForumRight: React.FC<fRight> = () => {
 				},
 			}}
 		>
-			
+			<Box p="10px" fontWeight="semibold" fontSize="25px">Top Communties</Box>
 		</Box>
 	);
 };

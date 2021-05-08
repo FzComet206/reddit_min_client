@@ -1,29 +1,63 @@
 import { Box, Flex } from "@chakra-ui/react";
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 
-interface postWrapperProps {
-    title: string,
-    text: string,
-    createdat: string,
-    points: number
-}
+type PostWrapperProps = InputHTMLAttributes<HTMLInputElement> & {
+	title: string;
+	text: string;
+	createdat: string;
+	points: number;
+	unique: string;
+};
 
-export const PostWrapper: React.FC<postWrapperProps> = ({title, text, createdat, points, ...props}) => {
+export const PostWrapper: React.FC<PostWrapperProps> = ({
+	title,
+	text,
+	createdat,
+	points,
+	unique,
+}) => {
+	const onClickPost = (id: string) => {
+		console.log(id);
+	};
 
-    let t;
-    if (text.length > 501) {
-        t = text.slice(0, 500)
-    } else {
-        t = text
-    }
+	let t;
+	let expand = false;
+	if (text.length > 500) {
+		t = text.slice(0, 500);
+		expand = true;
+	} else {
+		t = text;
+	}
 
-    return (
-        <Flex direction="column" {...props} >
-            <Box bgColor="linkedin.100" padding="10px" borderRadius="md">
-                <Box fontWeight="semibold">Title: {title}</Box>
-                <Box p="15px">{t}</Box>
-                <Box fontWeight="semibold" >post created at {createdat} ----- upvotes {points}</Box>
-            </Box>
-        </Flex>
-    )
+	return (
+		<Flex direction="column">
+			<a onClick={() => onClickPost(unique)} href="#">
+				<Box bgColor="linkedin.100" padding="15px" borderTopRadius="md">
+					<Box fontWeight="semibold">Title: {title}</Box>
+					<Box p="15px">
+						{t}{" "}
+						{expand ? (
+							<Box fontWeight="semibold" textAlign="end">
+								Click to view full post
+							</Box>
+						) : null}
+					</Box>
+				</Box>
+			</a>
+			<Box
+				bgColor="linkedin.50"
+				fontWeight="semibold"
+				height="50px"
+				padding="10px"
+				borderBottomRadius="md"
+				whiteSpace="pre-wrap"
+			>
+				<Box float="left">
+					Upvotes: {points}
+					{"      "}Posted: {createdat} ago
+				</Box>{" "}
+				<Box float="right" pr="10px">----------   Admin</Box>
+			</Box>
+		</Flex>
+	);
 };
