@@ -15,7 +15,6 @@ export const ForumRight: React.FC<fRight> = () => {
 			borderRadius="md"
 			height="90vh"
 			overflow="auto"
-
 			css={{
 				"&::-webkit-scrollbar": {
 					width: "5px",
@@ -29,7 +28,14 @@ export const ForumRight: React.FC<fRight> = () => {
 				},
 			}}
 		>
-			<Box p="10px" fontWeight="semibold" fontSize="25px">Top Communties</Box>
+			<Box
+				p="10px"
+				fontWeight="semibold"
+				fontSize="25px"
+				whiteSpace="pre-wrap"
+			>
+				Top Communties
+			</Box>
 		</Box>
 	);
 };

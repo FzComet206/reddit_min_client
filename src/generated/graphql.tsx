@@ -91,6 +91,7 @@ export type Post = {
   creatorId: Scalars['Float'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
+  textSnippet: Scalars['String'];
 };
 
 export type PostInput = {
@@ -255,7 +256,7 @@ export type PostsQuery = (
   { __typename?: 'Query' }
   & { posts?: Maybe<Array<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'title' | 'text' | 'points' | 'createdAt' | 'updatedAt'>
+    & Pick<Post, 'id' | 'title' | 'textSnippet' | 'points' | 'createdAt' | 'updatedAt'>
   )>> }
 );
 
@@ -370,7 +371,7 @@ export const PostsDocument = gql`
   posts(cursor: $cursor, limit: $limit) {
     id
     title
-    text
+    textSnippet
     points
     createdAt
     updatedAt

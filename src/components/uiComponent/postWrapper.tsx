@@ -3,7 +3,7 @@ import React, { InputHTMLAttributes } from "react";
 
 type PostWrapperProps = InputHTMLAttributes<HTMLInputElement> & {
 	title: string;
-	text: string;
+	textSnippets: string;
 	createdat: string;
 	points: number;
 	unique: string;
@@ -11,7 +11,7 @@ type PostWrapperProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export const PostWrapper: React.FC<PostWrapperProps> = ({
 	title,
-	text,
+	textSnippets,
 	createdat,
 	points,
 	unique,
@@ -20,22 +20,18 @@ export const PostWrapper: React.FC<PostWrapperProps> = ({
 		console.log(id);
 	};
 
-	let t;
 	let expand = false;
-	if (text.length > 500) {
-		t = text.slice(0, 500);
+	if (textSnippets.length == 400) {
 		expand = true;
-	} else {
-		t = text;
 	}
 
 	return (
 		<Flex direction="column">
-			<a onClick={() => onClickPost(unique)} href="#">
+			<a onClick={() => onClickPost(unique)} href="/#">
 				<Box bgColor="linkedin.100" padding="15px" borderTopRadius="md">
 					<Box fontWeight="semibold">Title: {title}</Box>
 					<Box p="15px">
-						{t}{" "}
+						{textSnippets}{" "}
 						{expand ? (
 							<Box fontWeight="semibold" textAlign="end">
 								Click to view full post

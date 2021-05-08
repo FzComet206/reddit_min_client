@@ -1,15 +1,15 @@
-import { Box, Skeleton, Stack } from "@chakra-ui/react";
-import React from "react";
+import { Box, Button, Skeleton, Stack } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { usePostsQuery } from "../../generated/graphql";
-import { PostWrapper } from "../../utils/postWrapper";
+import { PostWrapper } from "../uiComponent/postWrapper";
 
 interface formMiddleProps {}
 
 export const ForumMiddle: React.FC<formMiddleProps> = () => {
-	const [{ data }] = usePostsQuery({
-		variables: {
-			limit: 20,
-		},
+	const [variables, setVariables] = useState({ limit: 10, cursor: null as null | string });
+
+	const [{ data, fetching }] = usePostsQuery({
+		variables
 	});
 
 	const sk = (key: number) => {
@@ -65,7 +65,12 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 				{!data ? (
 					<Box>{arr}</Box>
 				) : (
-					<Stack mt="20px" spacing="20px" paddingLeft="10px" paddingRight="15px">
+					<Stack
+						mt="20px"
+						spacing="20px"
+						paddingLeft="10px"
+						paddingRight="15px"
+					>
 						{
 							//@ts-ignore
 							data.posts.map((p) => (
@@ -73,12 +78,27 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 									unique={p.id}
 									key={p.id}
 									title={p.title}
-									text={p.text}
+									textSnippets={p.textSnippet}
 									createdat={p.createdAt}
 									points={p.points}
 								/>
 							))
 						}
+						<Button
+							my={10}
+							m="auto"
+							isLoading={fetching}
+							onClick={() => {
+								console.log(data)
+								setVariables({
+									limit: variables.limit,
+									// @ts-ignore
+									cursor: data.posts[data.posts?.length - 1].createdAt
+								})
+							}}
+						>
+							Load More
+						</Button>
 					</Stack>
 				)}
 			</Box>

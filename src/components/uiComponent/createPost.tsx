@@ -21,6 +21,7 @@ import {
 import { Form, Formik } from "formik";
 import router from "next/router";
 import React, { useRef, useState } from "react";
+import { HashLoader } from "react-spinners";
 import { useCreatePostMutation, useMeQuery } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "./InputField";
@@ -30,6 +31,9 @@ export const CreatePost: React.FC<{}> = ({}) => {
 	const ref = useRef(null) as any;
 	const [, createPost] = useCreatePostMutation();
 	const [{ data }] = useMeQuery();
+
+	// loading post button ui
+	const [loading, setLoading] = useState(false);
 
 	// ui hooks
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,8 +57,10 @@ export const CreatePost: React.FC<{}> = ({}) => {
 	const onClickPost = () => {
 		if (!data?.me) {
 			router.push("/login");
+			setLoading(false);
 		} else {
 			onOpen();
+			setLoading(false);
 		}
 	};
 
@@ -87,14 +93,19 @@ export const CreatePost: React.FC<{}> = ({}) => {
 		<>
 			<Box>
 				<Button
-					onClick={onClickPost}
 					width="76px"
 					height="40px"
-					colorScheme="pink"
 					p={3}
 					mt="10px"
 					fontSize="20px"
 					fontWeight="semibold"
+					onClick={() => {
+						setLoading(true);
+						onClickPost();
+					}}
+					isLoading={loading}
+					colorScheme="pink"
+					spinner={<HashLoader size={25} color="white" />}
 				>
 					Post
 				</Button>
@@ -133,7 +144,7 @@ export const CreatePost: React.FC<{}> = ({}) => {
 									});
 								} else {
 									const response = await createPost(values);
-									console.log(response)
+									console.log(response);
 									// @ts-ignore: Unreachable code error
 									if (response.data?.createPost.errors) {
 										// lmao fk ts this works
