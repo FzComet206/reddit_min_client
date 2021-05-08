@@ -1,15 +1,25 @@
 import { Box, Button, Skeleton, Stack } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePostsQuery } from "../../generated/graphql";
 import { PostWrapper } from "../uiComponent/postWrapper";
 
 interface formMiddleProps {}
 
 export const ForumMiddle: React.FC<formMiddleProps> = () => {
-	const [variables, setVariables] = useState({ limit: 10, cursor: null as null | string });
+	const [scrollPosition, setScrollPosition] = useState(1);
+	// useEffect(() => {
+	// 	if (typeof window !== 'undefined' && window.scrollY !== 0) {
+	// 	  setScrollPosition(window.scrollY);
+	// 	}
+	//   }, []);
+
+	const [variables, setVariables] = useState({
+		limit: 10,
+		cursor: null as null | string,
+	});
 
 	const [{ data, fetching }] = usePostsQuery({
-		variables
+		variables,
 	});
 
 	const sk = (key: number) => {
@@ -25,8 +35,18 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 		arr.push(sk(index));
 	}
 
+	if (data) {
+		const scrollBox = document.getElementById("mainscroll");
+		// @ts-ignore
+		scrollBox.onscroll = (e) => {
+			// @ts-ignore
+			console.log(scrollBox.scrollTop);
+		};
+	}
+
 	return (
 		<Box
+			id="mainscroll"
 			ml="10px"
 			mr="10px"
 			mt="10px"
@@ -92,8 +112,10 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 								setVariables({
 									limit: variables.limit,
 									// @ts-ignore
-									cursor: data.posts[data.posts?.length - 1].createdAt
-								})
+									cursor:
+										data.posts[data.posts?.length - 1]
+											.createdAt,
+								});
 							}}
 						>
 							Load More
