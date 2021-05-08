@@ -1,11 +1,17 @@
-import { Box, Skeleton } from "@chakra-ui/react";
+import { Box, Flex, Skeleton, Stack, Wrap } from "@chakra-ui/react";
 import React from "react";
+import { usePostsQuery } from "../../generated/graphql";
+import { PostWrapper, postWrapper } from "../../utils/postWrapper";
 
-interface formMiddleProps {
-	
-}
+interface formMiddleProps {}
 
 export const ForumMiddle: React.FC<formMiddleProps> = () => {
+	const [{ data }] = usePostsQuery({
+		variables: {
+			limit: 20,
+		},
+	});
+
 	const sk = (key: number) => {
 		return (
 			<Box key={key} padding="20px">
@@ -54,7 +60,29 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 				Posts
 				-------------------------------------------------------------------------------------
 			</Box>
-			{arr}
+
+			<Box p="10px">
+				{!data ? (
+					<Box>{arr}</Box>
+				) : (
+					<Stack mt="20px" >
+						{
+							//@ts-ignore
+							data.posts.map((p) => (
+								<PostWrapper
+									key={p.id}
+									title={p.title}
+									text={p.text}
+									createdat={p.createdAt}
+									points={p.points}
+									paddingLeft = "10px"
+									paddingRight = "15px"
+								/>
+							))
+						}
+					</Stack>
+				)}
+			</Box>
 		</Box>
 	);
 };

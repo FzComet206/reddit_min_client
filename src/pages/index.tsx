@@ -6,10 +6,8 @@ import { MainBody } from "../components/bodyComponent/MainBody";
 import { createUrqlClient } from "../utils/createUrqlClient";
 
 const Index = () => {
-	// const [{data}] = usePostsQuery();
 	return (
 		<Flex bgColor="silver" height="100vh">
-			{/* {!data ? null: data.posts?.map(p=><div key={p.id}>{p.title}</div>)} */}
 			<MainBody />
 		</Flex>
 	);
