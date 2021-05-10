@@ -16,14 +16,19 @@ export const PostWrapper: React.FC<PostWrapperProps> = ({
 	points,
 	unique,
 }) => {
+	// return post id when clicked
 	const onClickPost = (id: string) => {
 		console.log(id);
 	};
 
+	// show full post text
 	let expand = false;
 	if (textSnippets.length == 400) {
 		expand = true;
 	}
+
+	// convert time
+	const date = new Date(parseInt(createdat)).toLocaleString()
 
 	return (
 		<Flex direction="column">
@@ -50,9 +55,11 @@ export const PostWrapper: React.FC<PostWrapperProps> = ({
 			>
 				<Box float="left">
 					Upvotes: {points}
-					{"      "}Posted: {createdat} ago
+					{"      "}Posted:  {date}
 				</Box>{" "}
-				<Box float="right" pr="10px">----------   Admin</Box>
+				<Box float="right" pr="10px">
+					by: Admin
+				</Box>
 			</Box>
 		</Flex>
 	);

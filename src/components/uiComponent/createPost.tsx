@@ -34,13 +34,12 @@ export const CreatePost: React.FC<{}> = ({}) => {
 
 	// loading post button ui
 	const [loading, setLoading] = useState(false);
-
 	// ui hooks
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const toast = useToast();
 
 	// facts
-	const [title, setTitle] = useState("Michael is handsome af");
+	const [title, setTitle] = useState("Michael is handsome af"); // todo actually save
 	const [text, setText] = useState("true");
 	const [tempTitle, setTempTitle] = useState("");
 	const [tempText, setTempText] = useState("");
@@ -57,7 +56,6 @@ export const CreatePost: React.FC<{}> = ({}) => {
 	const onClickPost = () => {
 		if (!data?.me) {
 			router.push("/login");
-			setLoading(false);
 		} else {
 			onOpen();
 			setLoading(false);
@@ -111,7 +109,12 @@ export const CreatePost: React.FC<{}> = ({}) => {
 				</Button>
 			</Box>
 
-			<Modal isOpen={isOpen} onClose={onCloseClick} size="6xl">
+			<Modal
+				closeOnOverlayClick={false}
+				isOpen={isOpen}
+				onClose={onCloseClick}
+				size="6xl"
+			>
 				<ModalOverlay />
 				<ModalContent>
 					<ModalHeader>Create your post !</ModalHeader>

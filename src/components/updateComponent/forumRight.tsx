@@ -1,4 +1,4 @@
-import { Box, Skeleton } from "@chakra-ui/react";
+import { Avatar, Box } from "@chakra-ui/react";
 import React from "react";
 
 interface fRight {}
@@ -34,7 +34,16 @@ export const ForumRight: React.FC<fRight> = () => {
 				fontSize="25px"
 				whiteSpace="pre-wrap"
 			>
-				Top Communties
+				Random Shits Here
+
+				<Box p="20px" mt="15px">
+					<Avatar src="ohh.gif" boxSize="200px"/>
+				</Box>
+
+				<Box p="20px" mt="15px">
+					<Avatar src="images.jpg" boxSize="200px"/>
+				</Box>
+
 			</Box>
 		</Box>
 	);

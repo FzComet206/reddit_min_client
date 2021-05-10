@@ -9,7 +9,7 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 	// for skeleton before loaded
 	const sk = (key: number) => {
 		return (
-			<Box key={key} padding="20px">
+			<Box key={key} pt="20px" pb="20px">
 				<Skeleton height="120px" />
 			</Box>
 		);
@@ -25,6 +25,7 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 		limit: 10,
 		cursor: null as null | string,
 	});
+
 	const [{ data }] = usePostsQuery({
 		// auto fetch when variables change
 		variables,
@@ -33,39 +34,43 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 	const fetchAdditional = () => {
 		setVariables({
 			limit: 10,
-			// @ts-ignore
 			cursor:
 				// @ts-ignore
-				data.posts[data.posts?.length - 1].createdAt,
+				data.posts.post[data.posts?.post.length - 1].createdAt,
 		});
-		setLoaded(true);
+		setLoaded(true); // scrolled and loaded set to false after this calls
 	};
 
 	// for auto scrolling
-	const [scrolled, setScrolled] = useState(false);
-	const [loaded, setLoaded] = useState(false);
+	const [scrolled, setScrolled] = useState(false); // decide when calling fetchadditional
+	const [loaded, setLoaded] = useState(false); // decide when set scroll to false so above will run
 	// trigger fetching through state when scrolled
 	if (data) {
 		const scrollBox = document.getElementById("mainscroll");
-		// @ts-ignore
-		scrollBox.onscroll = (e) => {
-			if (
-				// @ts-ignore
-				scrollBox?.scrollTop >=
-					//@ts-ignore
-					scrollBox?.scrollHeight - scrollBox?.offsetHeight - 200 &&
-				!scrolled
-			) {
-				fetchAdditional();
-				setScrolled(true);
-			}
 
-			if (loaded) {
-				setScrolled(false);
-			}
-		};
+		if (scrollBox) {
+			scrollBox.onscroll = () => {
+				if (
+					scrollBox?.scrollTop >=
+						scrollBox?.scrollHeight -
+							scrollBox?.offsetHeight -
+							200 &&
+					!scrolled
+				) {
+					if (data.posts?.post) {
+						fetchAdditional();
+						setScrolled(true);
+					}
+				}
+
+				if (loaded) {
+					setScrolled(false);
+					setLoaded(false);
+				}
+			};
+		}
 	}
-	console.log("rerenders");
+
 	// component
 	return (
 		<Box
@@ -116,19 +121,24 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 					>
 						{
 							// mapping each post onto post component and render as list
-							//@ts-ignore
-							data.posts.map((p) => (
-								<PostWrapper
-									unique={p.id}
-									key={p.id}
-									title={p.title}
-									textSnippets={p.textSnippet}
-									createdat={p.createdAt}
-									points={p.points}
-								/>
-							))
+							data.posts ? (
+								data.posts.post.map((p) => (
+									<PostWrapper
+										unique={p.id}
+										key={p.id}
+										title={p.title}
+										textSnippets={p.textSnippet}
+										createdat={p.createdAt}
+										points={p.points}
+									/>
+								))
+							) : (
+								<Box>{arr}</Box>
+							)
 						}
-						<Skeleton height="120px" />
+						{data.posts?.hasMore ? (
+							<Skeleton height="120px" />
+						) : <Box textAlign="center" borderRadius="md" bgColor="green.200">No More Posts :p</Box>}
 					</Stack>
 				)}
 			</Box>

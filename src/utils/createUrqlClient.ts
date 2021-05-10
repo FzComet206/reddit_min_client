@@ -4,12 +4,7 @@ import {
 	Exchange,
 	stringifyVariables,
 } from "urql";
-import {
-	cacheExchange,
-	NullArray,
-	Resolver,
-	Variables,
-} from "@urql/exchange-graphcache";
+import { cacheExchange, Resolver } from "@urql/exchange-graphcache";
 import {
 	LogoutMutation,
 	MeQuery,
@@ -53,26 +48,42 @@ const cursorPagination = (): Resolver => {
 
 		// we return results because we found data on cacche, so we need to tell urql when to do a query
 		const fieldKey = `${fieldName}(${stringifyVariables(fieldArgs)})`;
-		const isInTheCache = cache.resolve(entityKey, fieldKey);
+		const isInTheCache = cache.resolve(
+			cache.resolve(entityKey, fieldKey) as string,
+			"post"
+		);
 
 		info.partial = !isInTheCache; // cast to boolean
 
-		// we need to check is data is in the cache and return from cache
+		// we need to check if data is in the cache and return from cache
+		let hasMore = true;
 		const results: string[] = [];
 		fieldInfos.forEach((fi) => {
 			// from entitykey: query, get fi.fieldkey: posts  'pos{"limit":10}
-			const data = cache.resolve(entityKey, fi.fieldKey) as string[];
+			const key = cache.resolve(entityKey, fi.fieldKey) as string;
 			// array of post ids
 			// loop through all things in cache and compile in list
+			const data = cache.resolve(key, "post") as string[];
+			const _hasMore = cache.resolve(key, "hasMore");
+
+			if (!_hasMore) {
+				hasMore = _hasMore as boolean;
+			}
 			results.push(...data);
 		});
 
-		return results;
+		const obj = {
+			post: results,
+			hasMore: hasMore,
+			__typename: "PaginatedPost"
+		};
+
+		return obj
 	};
 };
 
 export const createUrqlClient = (ssrExchange: any) => ({
-	url: `${config.serveripdev}:${config.serverport}/graphql`,
+	url: `${config.serverip}:${config.serverport}/graphql`,
 
 	fetchOptions: {
 		credentials: "include" as const,
@@ -81,6 +92,9 @@ export const createUrqlClient = (ssrExchange: any) => ({
 	exchanges: [
 		dedupExchange,
 		cacheExchange({
+			keys: {
+				PaginatedPost: () => null,
+			},
 			resolvers: {
 				Query: {
 					posts: cursorPagination(), // client side resolver for post.graohql
