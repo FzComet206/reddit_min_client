@@ -1,27 +1,12 @@
-import { Box, Button, Skeleton, Stack } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Box, Skeleton, Stack } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { usePostsQuery } from "../../generated/graphql";
 import { PostWrapper } from "../uiComponent/postWrapper";
 
 interface formMiddleProps {}
 
 export const ForumMiddle: React.FC<formMiddleProps> = () => {
-	const [scrollPosition, setScrollPosition] = useState(1);
-	// useEffect(() => {
-	// 	if (typeof window !== 'undefined' && window.scrollY !== 0) {
-	// 	  setScrollPosition(window.scrollY);
-	// 	}
-	//   }, []);
-
-	const [variables, setVariables] = useState({
-		limit: 10,
-		cursor: null as null | string,
-	});
-
-	const [{ data, fetching }] = usePostsQuery({
-		variables,
-	});
-
+	// for skeleton before loaded
 	const sk = (key: number) => {
 		return (
 			<Box key={key} padding="20px">
@@ -35,15 +20,53 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 		arr.push(sk(index));
 	}
 
+	// for fetching and options
+	const [variables, setVariables] = useState({
+		limit: 10,
+		cursor: null as null | string,
+	});
+	const [{ data }] = usePostsQuery({
+		// auto fetch when variables change
+		variables,
+	});
+	// fetch function
+	const fetchAdditional = () => {
+		setVariables({
+			limit: 10,
+			// @ts-ignore
+			cursor:
+				// @ts-ignore
+				data.posts[data.posts?.length - 1].createdAt,
+		});
+		setLoaded(true);
+	};
+
+	// for auto scrolling
+	const [scrolled, setScrolled] = useState(false);
+	const [loaded, setLoaded] = useState(false);
+	// trigger fetching through state when scrolled
 	if (data) {
 		const scrollBox = document.getElementById("mainscroll");
 		// @ts-ignore
 		scrollBox.onscroll = (e) => {
-			// @ts-ignore
-			console.log(scrollBox.scrollTop);
+			if (
+				// @ts-ignore
+				scrollBox?.scrollTop >=
+					//@ts-ignore
+					scrollBox?.scrollHeight - scrollBox?.offsetHeight - 200 &&
+				!scrolled
+			) {
+				fetchAdditional();
+				setScrolled(true);
+			}
+
+			if (loaded) {
+				setScrolled(false);
+			}
 		};
 	}
-
+	console.log("rerenders");
+	// component
 	return (
 		<Box
 			id="mainscroll"
@@ -92,6 +115,7 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 						paddingRight="15px"
 					>
 						{
+							// mapping each post onto post component and render as list
 							//@ts-ignore
 							data.posts.map((p) => (
 								<PostWrapper
@@ -104,22 +128,7 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 								/>
 							))
 						}
-						<Button
-							my={10}
-							m="auto"
-							isLoading={fetching}
-							onClick={() => {
-								setVariables({
-									limit: variables.limit,
-									// @ts-ignore
-									cursor:
-										data.posts[data.posts?.length - 1]
-											.createdAt,
-								});
-							}}
-						>
-							Load More
-						</Button>
+						<Skeleton height="120px" />
 					</Stack>
 				)}
 			</Box>
