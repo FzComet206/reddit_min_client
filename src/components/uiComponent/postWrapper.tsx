@@ -83,6 +83,8 @@ export const PostWrapper: React.FC<PostWrapperProps> = ({
 			>
 				<Box float="left">
 					Upvotes: {points}
+					{"      "}
+					Comments: 0
 					{"      "}Posted: {date}
 				</Box>{" "}
 				<Box float="right" pr="10px">
