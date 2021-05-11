@@ -130,6 +130,8 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 										textSnippets={p.textSnippet}
 										createdat={p.createdAt}
 										points={p.points}
+										creator={p.creator.nickname}
+										nb={p.creator.is_op}
 									/>
 								))
 							) : (

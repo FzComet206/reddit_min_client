@@ -1,4 +1,12 @@
-import { Box, Flex } from "@chakra-ui/react";
+import {
+	Avatar,
+	Badge,
+	Box,
+	Flex,
+	Tag,
+	TagLabel,
+	Tooltip,
+} from "@chakra-ui/react";
 import React, { InputHTMLAttributes } from "react";
 
 type PostWrapperProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -7,6 +15,8 @@ type PostWrapperProps = InputHTMLAttributes<HTMLInputElement> & {
 	createdat: string;
 	points: number;
 	unique: string;
+	creator: string;
+	nb: Boolean;
 };
 
 export const PostWrapper: React.FC<PostWrapperProps> = ({
@@ -15,6 +25,8 @@ export const PostWrapper: React.FC<PostWrapperProps> = ({
 	createdat,
 	points,
 	unique,
+	creator,
+	nb,
 }) => {
 	// return post id when clicked
 	const onClickPost = (id: string) => {
@@ -28,7 +40,23 @@ export const PostWrapper: React.FC<PostWrapperProps> = ({
 	}
 
 	// convert time
-	const date = new Date(parseInt(createdat)).toLocaleString()
+	const date = new Date(parseInt(createdat)).toLocaleString();
+
+	const mytag = (
+		<Tooltip label="ur dad :D">
+			<Tag size="md" colorScheme="purple" borderRadius="full" mt="2px">
+				<TagLabel>{creator}</TagLabel>
+				<Avatar src="images.jpg" size="xs" name="op" ml={2} mr={-1} />
+			</Tag>
+		</Tooltip>
+	);
+
+	const normaltag = (
+		<Tag size="md" colorScheme="teal" borderRadius="full" mt="2px">
+			<TagLabel>{creator}</TagLabel>
+			<Avatar src="dango.jpg" size="xs" name="op" ml={2} mr={-1} />
+		</Tag>
+	);
 
 	return (
 		<Flex direction="column">
@@ -55,10 +83,20 @@ export const PostWrapper: React.FC<PostWrapperProps> = ({
 			>
 				<Box float="left">
 					Upvotes: {points}
-					{"      "}Posted:  {date}
+					{"      "}Posted: {date}
 				</Box>{" "}
 				<Box float="right" pr="10px">
-					by: Admin
+					{nb ? (
+						<Badge variant="solid" colorScheme="purple">
+							op
+						</Badge>
+					) : (
+						<Badge variant="solid" colorScheme="green">
+							user
+						</Badge>
+					)}
+					{"   "}
+					{nb ? mytag : normaltag}
 				</Box>
 			</Box>
 		</Flex>

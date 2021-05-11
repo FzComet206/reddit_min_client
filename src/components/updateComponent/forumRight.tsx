@@ -39,9 +39,20 @@ export const ForumRight: React.FC<fRight> = () => {
 				<Box p="20px" mt="15px">
 					<Avatar src="ohh.gif" boxSize="200px"/>
 				</Box>
-
 				<Box p="20px" mt="15px">
-					<Avatar src="images.jpg" boxSize="200px"/>
+					<Avatar src="ohh.gif" boxSize="200px"/>
+				</Box>
+				<Box p="20px" mt="15px">
+					<Avatar src="ohh.gif" boxSize="200px"/>
+				</Box>
+				<Box p="20px" mt="15px">
+					<Avatar src="ohh.gif" boxSize="200px"/>
+				</Box>
+				<Box p="20px" mt="15px">
+					<Avatar src="ohh.gif" boxSize="200px"/>
+				</Box>
+				<Box p="20px" mt="15px">
+					<Avatar src="ohh.gif" boxSize="200px"/>
 				</Box>
 
 			</Box>
