@@ -269,7 +269,7 @@ export type PostsQuery = (
       & Pick<Post, 'id' | 'title' | 'textSnippet' | 'points' | 'createdAt' | 'updatedAt'>
       & { creator: (
         { __typename?: 'OpUsers' }
-        & Pick<OpUsers, 'nickname' | 'is_op'>
+        & Pick<OpUsers, 'id' | 'nickname' | 'is_op'>
       ) }
     )> }
   )> }
@@ -392,6 +392,7 @@ export const PostsDocument = gql`
       createdAt
       updatedAt
       creator {
+        id
         nickname
         is_op
       }

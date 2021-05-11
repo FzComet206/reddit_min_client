@@ -75,14 +75,13 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 	return (
 		<Box
 			id="mainscroll"
-			ml="10px"
 			mr="10px"
-			mt="10px"
+			ml="10px"
 			bg="#CECBC2"
-			width="80%"
+			width="75%"
 			float="left"
-			borderRadius="md"
-			height="90vh"
+			borderTopRadius="md"
+			height="100%"
 			overflow="auto"
 			css={{
 				"&::-webkit-scrollbar": {
@@ -109,7 +108,7 @@ export const ForumMiddle: React.FC<formMiddleProps> = () => {
 				------------------------------------------------------------------------------
 			</Box>
 
-			<Box p="10px">
+			<Box>
 				{!data ? (
 					<Box>{arr}</Box>
 				) : (

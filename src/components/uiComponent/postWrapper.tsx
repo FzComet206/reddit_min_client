@@ -80,6 +80,7 @@ export const PostWrapper: React.FC<PostWrapperProps> = ({
 				padding="10px"
 				borderBottomRadius="md"
 				whiteSpace="pre-wrap"
+				cursor="default"
 			>
 				<Box float="left">
 					Upvotes: {points}
@@ -87,7 +88,7 @@ export const PostWrapper: React.FC<PostWrapperProps> = ({
 					Comments: 0
 					{"      "}Posted: {date}
 				</Box>{" "}
-				<Box float="right" pr="10px">
+				<Box float="right" pr="10px" cursor="default">
 					{nb ? (
 						<Badge variant="solid" colorScheme="purple">
 							op

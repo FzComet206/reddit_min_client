@@ -11,6 +11,7 @@ query Posts($limit: Int!, $cursor: String){
           createdAt
           updatedAt
           creator {
+            id
             nickname
             is_op
           }

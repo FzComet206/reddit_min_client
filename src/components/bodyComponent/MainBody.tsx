@@ -6,18 +6,17 @@ import { CenterBody } from "./_centerBody";
 export const MainBody: React.FC<{}> = () => {
 	return (
 		<Flex
-			paddingLeft={1}
-			paddingRight={1}
 			mx="auto"
 			width="75%"
 			minWidth="1400px"
 			height="100vh"
+			bg="#6C6F73"
 		>
-			<Box width="7%" float="left" mr="3px" overflow="auto">
+			<Box width="6%" float="left" overflow="auto">
 				<LeftBar />
 			</Box>
 
-			<Box width="93%" minWidth="900px" float="right" >
+			<Box width="94%" minWidth="900px" float="right" >
 				<CenterBody />
 			</Box>
 		</Flex>

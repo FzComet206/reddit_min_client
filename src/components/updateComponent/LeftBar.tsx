@@ -6,14 +6,9 @@ export const LeftBar = () => {
 	
 	return (
 		<Box
-			// the blue #465362
-			minWidth="40px"
-			borderRadius="md"
-			//#EDAE49
-			bgColor="#5C5F63"
+			bg="grey"
 			height="100vh"
-			overflow="auto"
-			p={3}
+			p="10px"
 		>
 			<CreatePost/>
 		</Box>

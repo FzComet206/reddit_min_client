@@ -6,22 +6,14 @@ import { NavBar } from "../updateComponent/NavBar";
 
 export const CenterBody: React.FC<{}> = () => {
 	return (
-		// #F6BD60 the yellow
-		// #2C2F33 discord dark
-		// #2C2F48
-		// #4D5071
 		<Box
-			bg="#5C5F63"
-			minWidth="300px"
-			borderRadius="md"
+			bg="#6C6F73"
 			height="100vh"
 			paddingRight="5px"
 		>
-			<Box paddingTop={1} />
-
 			<NavBar></NavBar>
 
-			<Flex>
+			<Flex height="93vh">
 				<ForumMiddle />
 
 				<ForumRight />

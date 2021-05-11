@@ -111,18 +111,18 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 
 	return (
 		// #4E598C the blue
-		<Flex p={3} borderRadius="lg" mr="5px" ml="5px">
+		<Flex p="8px" height="7vh">
 			<Flex width="80%">
 				<Box
 					textColor="whiteAlpha.800"
 					fontWeight="semibold"
 					fontSize="30px"
-					mx="auto"
+					pl="30px"
 				>
 					Cl Reddit
 				</Box>
 
-				<Box mx="auto" width="70%" paddingleft="20px" paddingTop="5px">
+				<Box ml="70px" width="710px"  paddingTop="5px">
 					<Input
 						bgColor="whiteAlpha.100"
 						value={value}
@@ -138,7 +138,6 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 				width="300px"
 				ml="5px"
 				justifyContent="flex-end"
-				mr="20px"
 				paddingTop="5px"
 			>
 				<Skeleton isLoaded={!fetching} transition="ease-out">

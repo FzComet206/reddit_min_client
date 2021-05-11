@@ -91,10 +91,8 @@ export const CreatePost: React.FC<{}> = ({}) => {
 		<>
 			<Box>
 				<Button
-					width="76px"
-					height="40px"
-					p={3}
-					mt="10px"
+					width="65px"
+					height="60px"
 					fontSize="20px"
 					fontWeight="semibold"
 					onClick={() => {
@@ -102,7 +100,7 @@ export const CreatePost: React.FC<{}> = ({}) => {
 						onClickPost();
 					}}
 					isLoading={loading}
-					colorScheme="pink"
+					colorScheme="linkedin"
 					spinner={<HashLoader size={25} color="white" />}
 				>
 					Post
